@@ -27,7 +27,7 @@ classes `literate` and `haskell` are part of the final program.
 
 You can load this file into `ghci` like so:
 
-    ghci -pgmL unlit-markdown Main.lhs
+    ghci -pgmL pandoc-unlit Main.lhs
 
 Or better yet, pipe the required flag into a `.ghci` file, and forget about it:
 
