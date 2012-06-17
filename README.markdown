@@ -42,7 +42,7 @@ work; for `runhaskell` only the latter works.
 ## Some other niceties
 
 With `pandoc-unlit` you can attach arbitrary classes to your code blocks, this
-allows you to customize the generated HTML with CSS.  You can e.g. hide code,
+allows you to customize the generated HTML with CSS.  You can e.g. hide
 boilerplate code.
 
 But what if I want plain old literate Haskell, that works without
@@ -61,7 +61,7 @@ And what if I need plain old markdown, without any pandoc specific extensions?
 
 ## Known limitations
 
-The line numbers, that GHC reports on errors, are bogus.
+The line numbers that GHC reports on errors are bogus.
 
 [delimited-code-blocks]: http://johnmacfarlane.net/pandoc/README.html#delimited-code-blocks
 [literate-haskell-support]: http://johnmacfarlane.net/pandoc/README.html#literate-haskell-support
