@@ -12,7 +12,7 @@ The following steps show how to set things up, so that:
 
 ### 1. Install `pandoc-unlit`
 
-    $ cabal install pandoc-unlit
+    $ cabal update && cabal install pandoc-unlit
 
 
 ### 2. Create a `README.markdown`
