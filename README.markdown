@@ -1,4 +1,4 @@
-# Literate Haskell support for Pandoc's Markdown flavor
+# Literate Haskell support for GitHub's Markdown flavor
 
 > `pandoc-unlit` allows you to have a `README.markdown`, that at the same
 > time is a *literate Haskell* program.
@@ -85,5 +85,11 @@ That was easy!
 Run it like so:
 
     $ cabal configure --enable-tests && cabal build && cabal test
+
+## Real world examples
+
+ * [hspec-expectations](https://github.com/sol/hspec-expectations#readme)
+ * [attoparsec-parsec](https://github.com/sol/attoparsec-parsec#readme)
+ * Your project here!
 
 That's it, have fun!
