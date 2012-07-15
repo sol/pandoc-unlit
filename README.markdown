@@ -1,67 +1,89 @@
-# Literate Haskell support for Pandoc's markdown flavor
+# Literate Haskell support for Pandoc's Markdown flavor
 
-`pandoc-unlit` makes it convenient to write literate Haskell programs with
-Pandoc's [delimited code blocks][delimited-code-blocks].  All code blocks with
-classes `literate` and `haskell` are part of the final program.
+> `pandoc-unlit` allows you to have a `README.markdown`, that at the same
+> time is a *literate Haskell* program.
 
-    Some markdown goes here.
+The following steps show how to set things up, so that:
 
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.haskell .literate}
-    module Main (main) where
+ * The Haskell code in your README.markdown gets syntax highlighted on GitHub
+ * You can run your literate Haskell within GHCi
+ * You can create a Cabal `test-suite` from your `README.markdown` (No broken
+   code examples anymore. *Yeah!*)
 
-    import System.Environment (getArgs, getProgName)
-    import System.IO (hPutStrLn, stderr)
-    import System.Exit (exitFailure)
+### 1. Install `pandoc-unlit`
 
+    $ cabal install pandoc-unlit
+
+
+### 2. Create a `README.markdown`
+
+
+    # nifty-library: Do nifty things (effortlessly!)
+
+    Here is a basic example:
+
+    ~~~ {.haskell .literate}
     main :: IO ()
-    main = getArgs >>= \args -> case args of
-        [n] -> print $ (fac . read) n
-        _ -> do
-          name <- getProgName
-          hPutStrLn stderr ("usage: " ++ name ++ " N")
-          exitFailure
+    main = putStrLn "That was easy!"
+    ~~~
 
-    fac :: Integer -> Integer
-    fac n = product [1..n]
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    And here is some code that looks nice, but does not yet work:
 
-You can load this file into `ghci` like so:
+    ~~~ {.haskell}
+    main :: IO ()
+    main = launchMissiles
+    ~~~
 
-    ghci -pgmL pandoc-unlit Main.lhs
+We use fenced code blocks here.  They are supported by both, GitHub's README
+renderer, and Pandoc.
+
+All code blocks with class `.haskell` are syntax highlighted on GitHub
+([like so](https://github.com/sol/pandoc-unlit/blob/master/example/README.markdown#readme)).
+
+All code blocks with classes `.haskell` and `.literate` are part of the
+literate program.
+
+### 3. Create a symbolic link `README.lhs -> README.markdown`
+
+    $ ln -s README.markdown README.lhs
+
+### 4. Run yor code
+
+At this point we can load the code into GHCi:
+
+    $ ghci -pgmLpandoc-unlit README.lhs
+    *Main> main
+    That was easy!
 
 Or better yet, pipe the required flag into a `.ghci` file, and forget about it:
 
-    echo ':set -pgmL pandoc-unlit' >> .ghci
-    ghci Main.lhs
+```
+$ echo ':set -pgmLpandoc-unlit' > .ghci
+```
+```
+$ ghci README.lhs
+*Main> main
+That was easy!
+```
 
-## A note about runhaskell
+### 5. Create a Cabal `test-suite`
 
-For `ghc` (and hence `ghci`) both, `-pgmL pandoc-unlit` and `-pgmLpandoc-unlit`
-work; for `runhaskell` only the latter works.
+    name:             nifty-library
+    version:          0.0.0
+    build-type:       Simple
+    cabal-version:    >= 1.8
 
-## Some other niceties
+    library
+      -- nothing here yet
 
-With `pandoc-unlit` you can attach arbitrary classes to your code blocks, this
-allows you to customize the generated HTML with CSS.  You can e.g. hide
-boilerplate code.
+    test-suite spec
+      type:           exitcode-stdio-1.0
+      main-is:        README.lhs
+      build-depends:  base
+      ghc-options:    -pgmL pandoc-unlit
 
-But what if I want plain old literate Haskell, that works without
-`pandoc-unlit`?
+Run it like so:
 
-Pandoc has [support for literate Haskell programs] [literate-haskell-support]
-that use either "bird tracks" or code surrounded by `\begin{code}` and
-`\end{code}`.  And it can convert your code into that form.
+    $ cabal configure --enable-tests && cabal build && cabal test
 
-    pandoc Main.lhs -t markdown+lhs    # this produces invalid markdown
-
-<!--
-And what if I need plain old markdown, without any pandoc specific extensions?
-`pandoc-to-markdown` is for you.
--->
-
-## Known limitations
-
-The line numbers that GHC reports on errors are bogus.
-
-[delimited-code-blocks]: http://johnmacfarlane.net/pandoc/README.html#delimited-code-blocks
-[literate-haskell-support]: http://johnmacfarlane.net/pandoc/README.html#literate-haskell-support
+That's it, have fun!
