@@ -8,6 +8,10 @@ author:           Simon Hengel <sol@typeful.net>
 build-type:       Simple
 cabal-version:    >= 1.6
 
+source-repository head
+  type: git
+  location: https://github.com/sol/pandoc-unlit
+
 executable pandoc-unlit
   ghc-options:
       -Wall
