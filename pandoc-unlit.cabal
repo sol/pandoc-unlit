@@ -4,7 +4,8 @@ synopsis:         Literate Haskell support for Pandoc's Markdown flavor
 category:         Development
 license:          MIT
 license-file:     LICENSE
-author:           Simon Hengel <sol@typeful.net>
+copyright:        (c) 2012 Simon Hengel
+maintainer:       Simon Hengel <sol@typeful.net>
 build-type:       Simple
 cabal-version:    >= 1.6
 
@@ -18,7 +19,7 @@ executable pandoc-unlit
   hs-source-dirs:
       src
   build-depends:
-      base
+      base    < 5
     , pandoc
   main-is:
       Main.hs
