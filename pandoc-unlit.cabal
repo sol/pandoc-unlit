@@ -5,9 +5,11 @@ category:         Development
 license:          MIT
 license-file:     LICENSE
 copyright:        (c) 2012 Simon Hengel
+author:           Simon Hengel <sol@typeful.net>
 maintainer:       Simon Hengel <sol@typeful.net>
 build-type:       Simple
 cabal-version:    >= 1.6
+description:      Documentation is here: <https://github.com/sol/pandoc-unlit#readme>
 
 source-repository head
   type: git
