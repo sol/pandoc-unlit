@@ -68,19 +68,21 @@ That was easy!
 
 ### 5. Create a Cabal `test-suite`
 
-    name:             nifty-library
-    version:          0.0.0
-    build-type:       Simple
-    cabal-version:    >= 1.8
+```
+name:             nifty-library
+version:          0.0.0
+build-type:       Simple
+cabal-version:    >= 1.8
 
-    library
-      -- nothing here yet
+library
+  -- nothing here yet
 
-    test-suite spec
-      type:           exitcode-stdio-1.0
-      main-is:        README.lhs
-      build-depends:  base
-      ghc-options:    -pgmL pandoc-unlit
+test-suite readme
+  type:           exitcode-stdio-1.0
+  main-is:        README.lhs
+  build-depends:  base
+  ghc-options:    -pgmL pandoc-unlit
+```
 
 Run it like so:
 
