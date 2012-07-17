@@ -90,8 +90,8 @@ Run it like so:
 
 ## Real world examples
 
- * [hspec-expectations](https://github.com/sol/hspec-expectations#readme)
  * [attoparsec-parsec](https://github.com/sol/attoparsec-parsec#readme)
- * Your project here!
+ * [hspec-expectations](https://github.com/sol/hspec-expectations#readme)
+ * [wai](https://github.com/sol/wai/tree/master/wai#readme)
 
 That's it, have fun!
